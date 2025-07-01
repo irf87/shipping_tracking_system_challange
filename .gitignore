@@ -44,3 +44,7 @@ next-env.d.ts
 
 # cursor
 /.cursor
+
+# Ignore SQLite dev/test databases
+/prisma/*.db
+/prisma/memorydb
