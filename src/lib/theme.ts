@@ -8,6 +8,13 @@ export const theme = {
     border: '#E5E5E5',
     overlay: 'rgba(0,0,0,0.4)',
     transparent: 'transparent',
+    primary: '#000000',
+    secondary: '#111111',
+    tertiary: '#222222',
+    quaternary: '#333333',
+    quinary: '#444444',
+    senary: '#555555',
+    septenary: '#666666',
   },
   spacing: {
     xs: '0.25rem',  // 4px

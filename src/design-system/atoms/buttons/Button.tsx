@@ -14,11 +14,11 @@ const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const baseStyles =
-    'w-full flex items-center justify-center px-4 py-2 rounded-md font-semibold transition-colors focus:outline-none';
+    'w-full flex items-center justify-center px-4 py-2 rounded-md font-semibold transition-colors focus:outline-none cursor-pointer';
   const contained =
-    'bg-[var(--accent)] text-white border border-[var(--accent)] hover:bg-opacity-90';
+    'bg-[var(--accent)] text-white border border-[var(--accent)] hover:bg-[var(--primary)]';
   const outlined =
-    'bg-transparent text-[var(--accent)] border border-[var(--accent)] hover:bg-[var(--accent)] hover:text-white';
+    'bg-transparent text-[var(--primary)] border border-[var(--primary)] hover:bg-[var(--accent)] hover:text-white';
   const disabledStyles = 'opacity-50 cursor-not-allowed';
 
   return (
