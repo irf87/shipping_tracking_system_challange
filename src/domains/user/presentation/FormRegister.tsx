@@ -2,6 +2,8 @@
 
 import Input from '@/design-system/atoms/inputs/Input';
 import Button from '@/design-system/atoms/buttons/Button';
+import ErrorFormMessage from '@/design-system/atoms/messages/ErrorFormMessage';
+
 import { useRouter } from 'next/navigation';
 
 import useRegister from './hooks/useRegister';
@@ -53,9 +55,11 @@ const FormRegister = () => {
       <Button type="button" variant="contained" loading={isLoading} onClick={onRegister}>
         Register
       </Button>
-      {errorMessage && (
-        <div className="text-red-500 text-sm mt-2 text-center">{errorMessage}</div>
-      )}
+
+      <div className="flex justify-center">
+        <ErrorFormMessage message={errorMessage} />
+      </div>
+
       <Button type="button" variant="outlined" onClick={() => router.push('/login')}>
         Cancel
       </Button>

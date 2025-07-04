@@ -2,6 +2,7 @@
 
 import Input from '@/design-system/atoms/inputs/Input';
 import Button from '@/design-system/atoms/buttons/Button';
+import ErrorFormMessage from '@/design-system/atoms/messages/ErrorFormMessage';
 import useAuth from './hooks/useAuth';
 
 const FormLogin = () => {
@@ -11,11 +12,7 @@ const FormLogin = () => {
     <form className="space-y-6">
       <h1 className="text-2xl font-bold text-center mb-6 text-[var(--foreground)]">Login</h1>
       
-      {errorMessage && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
-          {errorMessage}
-        </div>
-      )}
+      <ErrorFormMessage message={errorMessage} />
       
       <Input
         label="Email"
