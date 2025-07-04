@@ -13,9 +13,24 @@ For detailed information about the project architecture, patterns, and technical
 npm install
 ```
 
-2. Set up your environment variables (create `.env` file with your PostgreSQL database URL)
+2. **Start the PostgreSQL database with Docker:**
+```bash
+docker-compose up -d
+```
 
-3. Run database migrations:
+3. **Set up environment variables:**
+```bash
+# Copy environment files
+cp env.example .env
+cp env.test.example .env.test
+```
+
+The `.env` file should contain your PostgreSQL database URL:
+```bash
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/tracking_db"
+```
+
+4. Run database migrations:
 ```bash
 npx prisma migrate dev
 ```
@@ -65,3 +80,10 @@ The provider switching is handled automatically by the test script, but you may 
 - `npm run build` - Build for production
 - `npm run start` - Start production server
 - `npm run lint` - Run ESLint
+
+### Docker Database Commands
+
+- `docker-compose up -d` - Start PostgreSQL database in background
+- `docker-compose down` - Stop and remove database container
+- `docker-compose logs postgres` - View database logs
+- `docker-compose restart postgres` - Restart database service
