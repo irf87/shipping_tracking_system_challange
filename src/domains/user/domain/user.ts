@@ -9,10 +9,9 @@ export interface UserRegister {
   name: string;
 }
 
-export interface UserLogin {
-  password: string;
-}
-
 export interface UserRegisterRepository {
   create(user: UserRegister): Promise<User>;
+}
+export interface UserProfile extends User {
+  name: string;
 }

@@ -2,6 +2,8 @@ import {AxiosInstance} from 'axios';
 
 import { UserRegisterRepository } from "@/domains/user/domain/user";
 import { UserRegister, User } from '@/domains/user/domain/user';
+import { extractAxiosErrorMessage } from '@/core/utils/readCommonErrors';
+
 export class RegisterUserRepositoryImpl implements UserRegisterRepository {
   constructor(private readonly api: AxiosInstance) {}
 
@@ -13,14 +15,9 @@ export class RegisterUserRepositoryImpl implements UserRegisterRepository {
       }
       return response.data.data;
     } catch (error: unknown) {
-      if (
-        typeof error === 'object' &&
-        error !== null &&
-        'response' in error &&
-        typeof (error as { response?: unknown }).response === 'object' &&
-        (error as { response?: { data?: { error?: { message?: string } } } }).response?.data?.error
-      ) {
-        throw new Error((error as { response: { data: { error: { message: string } } } }).response.data.error.message);
+      const axiosMsg = extractAxiosErrorMessage(error);
+      if (axiosMsg) {
+        throw new Error(axiosMsg);
       }
       throw error;
     }

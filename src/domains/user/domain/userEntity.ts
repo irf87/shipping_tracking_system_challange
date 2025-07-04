@@ -2,8 +2,11 @@ import { Validation } from "@/core/types/validations";
 
 export class UserEntity {
   validateEmail(email: string) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+    const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    return {
+      isValid,
+      errorMessage: isValid ? undefined : 'Invalid email address',
+    };
   }
 
   validatePassword(password: string): Validation {

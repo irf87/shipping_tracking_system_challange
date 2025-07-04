@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import { prisma } from '../../../../../lib/prisma';
-import jwt from 'jsonwebtoken';
+import { generateToken } from '@/lib/jwt';
+import { setCookie } from '@/lib/cookies';
 
 export async function POST(request: NextRequest) {
   try {
@@ -44,7 +45,7 @@ export async function POST(request: NextRequest) {
       email: user.email
     });
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       token,
       user: {
         id: user.id,
@@ -53,6 +54,16 @@ export async function POST(request: NextRequest) {
       }
     });
 
+    await setCookie('auth-token', token);
+    
+    await setCookie('auth-user', JSON.stringify({
+      id: user.id,
+      email: user.email,
+      name: user.name
+    }), { httpOnly: false });
+
+    return response;
+
   } catch (error) {
     console.error('Login error:', error);
     return NextResponse.json(
@@ -60,9 +71,4 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
-}
-
-function generateToken(payload: { userId: string; email: string }): string {
-  const secret = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
-  return jwt.sign(payload, secret, { expiresIn: '24h' });
 } 
